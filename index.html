@@ -4,22 +4,104 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Opening Mail…</title>
+<meta name="color-scheme" content="light dark">
+<title>Opening Mail</title>
 <style>
-  body { font: 15px -apple-system, system-ui, sans-serif; max-width: 30em; margin: 3em auto; padding: 0 16px; color: #333; background: #fff; }
-  a { color: #06c; }
+  :root {
+    --paper: #f3efe6;
+    --ink: #1c1b19;
+    --muted: #8a8478;
+    --seal: #b8432f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #151412;
+      --ink: #e9e4d8;
+      --muted: #7d776c;
+      --seal: #c9553f;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: ui-serif, "New York", Georgia, serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { text-align: center; max-width: 26rem; }
+  svg { width: min(180px, 46vw); height: auto; display: block; margin: 0 auto 2.2rem; overflow: visible; }
+  .ink { fill: var(--ink); }
+  .trace {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 26;
+    stroke-linecap: round;
+    stroke-dasharray: 415;
+    stroke-dashoffset: 415;
+    animation: draw 1.5s cubic-bezier(.6, 0, .3, 1) forwards;
+  }
+  .seal {
+    fill: var(--seal);
+    opacity: 0;
+    animation: appear .5s ease 1.4s forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes appear { to { opacity: 1; } }
+  h1 {
+    font-weight: 400;
+    font-size: 1.05rem;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    margin: 0 0 .9rem;
+    padding-left: .32em; /* balance trailing letter-spacing */
+  }
+  p {
+    margin: 0;
+    color: var(--muted);
+    font-style: italic;
+    font-size: .95rem;
+    line-height: 1.5;
+    min-height: 1.5em;
+  }
+  a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { color: var(--ink); }
+  @media (prefers-reduced-motion: reduce) {
+    .trace { animation: none; stroke-dashoffset: 0; }
+    .seal { animation: none; opacity: 1; }
+  }
 </style>
 </head>
 <body>
-<p id="msg">Opening Mail…</p>
-<p><a id="go" href="#">Open the message in Mail</a></p>
+<main>
+  <svg viewBox="0 0 200 200" aria-hidden="true">
+    <defs>
+      <mask id="reveal" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+        <path class="trace" d="M 151.5 59.8 L 152.6 61.3 L 153.7 62.8 L 154.8 64.4 L 155.8 66.0 L 156.8 67.7 L 157.7 69.3 L 158.6 71.0 L 159.5 72.7 L 160.3 74.4 L 161.1 76.2 L 161.9 77.9 L 162.6 79.7 L 163.3 81.5 L 163.9 83.3 L 164.5 85.2 L 165.0 87.0 L 165.5 88.9 L 165.9 90.8 L 166.3 92.7 L 166.7 94.6 L 166.9 96.6 L 167.2 98.5 L 167.3 100.5 L 167.4 102.4 L 167.4 104.4 L 167.4 106.4 L 167.2 108.4 L 167.0 110.3 L 166.8 112.3 L 166.4 114.2 L 166.0 116.2 L 165.5 118.1 L 165.0 120.0 L 164.3 121.9 L 163.6 123.7 L 162.9 125.6 L 162.0 127.3 L 161.1 129.1 L 160.2 130.8 L 159.2 132.5 L 158.1 134.2 L 157.0 135.8 L 155.8 137.4 L 154.6 138.9 L 153.3 140.4 L 152.0 141.9 L 150.7 143.3 L 149.3 144.7 L 147.9 146.0 L 146.5 147.3 L 145.0 148.6 L 143.5 149.8 L 142.0 151.0 L 140.5 152.1 L 138.9 153.2 L 137.3 154.3 L 135.7 155.3 L 134.0 156.3 L 132.4 157.3 L 130.7 158.2 L 129.0 159.1 L 127.2 159.9 L 125.5 160.6 L 123.7 161.4 L 121.9 162.0 L 120.1 162.7 L 118.3 163.2 L 116.4 163.7 L 114.5 164.2 L 112.7 164.6 L 110.8 164.9 L 108.9 165.1 L 107.0 165.3 L 105.1 165.5 L 103.1 165.5 L 101.2 165.5 L 99.3 165.4 L 97.4 165.3 L 95.5 165.1 L 93.6 164.9 L 91.8 164.6 L 89.9 164.2 L 88.1 163.8 L 86.2 163.3 L 84.4 162.7 L 82.6 162.2 L 80.8 161.5 L 79.1 160.9 L 77.3 160.2 L 75.6 159.4 L 73.9 158.6 L 72.2 157.8 L 70.6 157.0 L 68.9 156.1 L 67.3 155.2 L 65.7 154.2 L 64.1 153.2 L 62.5 152.2 L 61.0 151.1 L 59.5 150.1 L 58.0 148.9 L 56.5 147.8 L 55.0 146.6 L 53.6 145.3 L 52.2 144.1 L 50.8 142.8 L 49.4 141.4 L 48.1 140.0 L 46.8 138.6 L 45.6 137.1 L 44.4 135.6 L 43.3 134.0 L 42.2 132.4 L 41.1 130.8 L 40.2 129.1 L 39.2 127.4 L 38.4 125.7 L 37.6 123.9 L 36.8 122.1 L 36.2 120.2 L 35.6 118.4 L 35.0 116.5 L 34.6 114.6 L 34.2 112.7 L 33.8 110.8 L 33.5 108.8 L 33.3 106.9 L 33.2 105.0 L 33.1 103.0 L 33.1 101.1 L 33.1 99.1 L 33.2 97.2 L 33.3 95.2 L 33.5 93.3 L 33.8 91.3 L 34.1 89.4 L 34.4 87.5 L 34.8 85.6 L 35.2 83.7 L 35.7 81.8 L 36.3 79.9 L 36.8 78.1 L 37.5 76.2 L 38.2 74.4 L 38.9 72.6 L 39.7 70.8 L 40.5 69.0 L 41.4 67.3 L 42.3 65.6 L 43.3 63.9 L 44.3 62.2 L 45.4 60.6 L 46.6 59.0 L 47.8 57.4 L 49.0 55.9 L 50.3 54.4 L 51.7 53.0 L 53.1 51.6 L 54.5 50.3 L 56.0 49.1 L 57.6 47.8 L 59.2 46.7 L 60.8 45.6 L 62.5 44.6 L 64.1 43.6 L 65.9 42.7 L 67.6 41.9 L 69.4 41.1 L 71.2 40.4 L 73.0 39.7 L 74.9 39.1 L 76.7 38.5 L 78.6 38.1 L 80.4 37.6 L 82.3 37.2 L 84.2 36.9 L 86.0 36.6 L 87.9 36.3 L 89.8 36.1 L 91.7 35.9 L 93.6 35.8 L 95.4 35.7 L 97.3 35.7 L 99.2 35.7 L 101.1 35.7 L 102.9 35.8 L 104.8 35.9 L 106.7 36.0 L 108.5 36.2 L 110.4 36.4 L 112.3 36.7 L 114.1 37.0 L 116.0 37.4 L 117.8 37.8 L 119.6 38.3 L 121.5 38.8 L 123.3 39.4 L 125.0 40.0 L 126.8 40.7 L 128.6 41.4"/>
+      </mask>
+    </defs>
+    <!-- Ensō: one tapered brush stroke, revealed as if drawn -->
+    <path class="ink" mask="url(#reveal)" d="M 151.8 59.5 L 155.1 59.5 L 157.2 60.5 L 159.1 61.7 L 160.8 63.0 L 162.5 64.4 L 164.1 66.0 L 165.5 67.6 L 166.9 69.3 L 168.2 71.1 L 169.4 72.9 L 170.2 75.0 L 170.9 77.0 L 171.7 79.1 L 172.3 81.1 L 173.0 83.2 L 173.6 85.3 L 174.2 87.4 L 174.7 89.6 L 175.1 91.7 L 175.5 93.9 L 175.8 96.1 L 175.9 98.3 L 176.0 100.5 L 176.0 102.8 L 175.9 105.0 L 175.7 107.2 L 175.4 109.4 L 175.1 111.6 L 174.7 113.7 L 174.2 115.9 L 173.8 118.1 L 173.2 120.2 L 172.6 122.4 L 172.0 124.5 L 171.3 126.6 L 170.6 128.7 L 169.7 130.7 L 168.8 132.8 L 167.8 134.8 L 166.7 136.7 L 165.6 138.6 L 164.3 140.4 L 163.0 142.2 L 161.6 143.9 L 160.1 145.5 L 158.6 147.1 L 157.1 148.7 L 155.5 150.3 L 153.9 151.8 L 152.3 153.2 L 150.7 154.7 L 149.0 156.1 L 147.3 157.4 L 145.6 158.7 L 143.8 160.0 L 142.0 161.2 L 140.2 162.3 L 138.3 163.4 L 136.3 164.3 L 134.4 165.2 L 132.4 166.0 L 130.4 166.8 L 128.3 167.5 L 126.3 168.1 L 124.3 168.7 L 122.2 169.3 L 120.2 169.8 L 118.1 170.4 L 116.1 170.8 L 114.0 171.3 L 111.9 171.7 L 109.8 172.0 L 107.7 172.2 L 105.6 172.4 L 103.5 172.5 L 101.4 172.4 L 99.3 172.3 L 97.2 172.2 L 95.1 171.9 L 93.0 171.5 L 90.9 171.2 L 88.9 170.7 L 86.8 170.2 L 84.8 169.7 L 82.8 169.1 L 80.8 168.5 L 78.9 167.9 L 76.9 167.2 L 75.0 166.5 L 73.0 165.7 L 71.2 164.9 L 69.3 164.0 L 67.5 163.0 L 65.7 162.0 L 63.9 160.9 L 62.2 159.7 L 60.6 158.5 L 58.9 157.2 L 57.3 156.0 L 55.7 154.7 L 54.2 153.4 L 52.6 152.0 L 51.1 150.7 L 49.5 149.3 L 48.0 147.9 L 46.5 146.5 L 45.0 145.0 L 43.6 143.5 L 42.2 141.9 L 40.9 140.3 L 39.7 138.6 L 38.5 136.9 L 37.3 135.2 L 36.3 133.3 L 35.3 131.5 L 34.3 129.6 L 33.4 127.7 L 32.6 125.8 L 31.8 123.9 L 31.0 121.9 L 30.3 119.9 L 29.6 117.9 L 29.0 115.8 L 28.5 113.8 L 28.0 111.7 L 27.6 109.6 L 27.3 107.5 L 27.1 105.4 L 27.0 103.3 L 27.0 101.1 L 27.1 99.0 L 27.2 96.9 L 27.4 94.8 L 27.7 92.7 L 28.1 90.6 L 28.4 88.5 L 28.8 86.4 L 29.3 84.4 L 29.8 82.3 L 30.3 80.3 L 30.9 78.2 L 31.5 76.2 L 32.2 74.2 L 32.9 72.2 L 33.7 70.3 L 34.6 68.3 L 35.5 66.4 L 36.5 64.6 L 37.6 62.8 L 38.7 61.0 L 39.9 59.2 L 41.1 57.5 L 42.4 55.8 L 43.7 54.1 L 45.0 52.5 L 46.4 50.9 L 47.9 49.3 L 49.3 47.8 L 50.8 46.3 L 52.4 44.9 L 54.0 43.5 L 55.7 42.2 L 57.4 41.0 L 59.2 39.8 L 61.1 38.8 L 62.9 37.8 L 64.9 36.9 L 66.8 36.1 L 68.8 35.3 L 70.8 34.6 L 72.8 34.0 L 74.8 33.4 L 76.8 32.9 L 78.8 32.5 L 80.8 32.1 L 82.9 31.7 L 84.9 31.4 L 87.0 31.2 L 89.0 31.1 L 91.0 31.0 L 93.1 31.0 L 95.1 31.1 L 97.1 31.2 L 99.1 31.4 L 101.1 31.6 L 103.1 31.9 L 105.1 32.2 L 107.0 32.6 L 109.0 33.0 L 110.9 33.4 L 112.8 33.9 L 114.7 34.4 L 116.6 34.9 L 118.5 35.5 L 120.3 36.2 L 122.1 36.9 L 123.9 37.7 L 125.7 38.5 L 127.4 39.4 L 129.1 40.4 L 128.2 42.1 L 126.5 41.5 L 124.6 41.0 L 122.8 40.5 L 121.0 40.1 L 119.2 39.7 L 117.4 39.3 L 115.5 39.1 L 113.7 38.8 L 111.9 38.6 L 110.1 38.5 L 108.2 38.5 L 106.4 38.4 L 104.6 38.5 L 102.8 38.6 L 101.0 38.7 L 99.2 38.8 L 97.5 39.0 L 95.7 39.2 L 93.9 39.5 L 92.2 39.7 L 90.4 40.0 L 88.7 40.2 L 86.9 40.5 L 85.2 40.9 L 83.4 41.2 L 81.7 41.6 L 79.9 42.1 L 78.2 42.6 L 76.5 43.1 L 74.8 43.7 L 73.1 44.4 L 71.5 45.1 L 69.9 45.9 L 68.2 46.7 L 66.7 47.6 L 65.1 48.5 L 63.5 49.4 L 62.0 50.4 L 60.5 51.4 L 59.0 52.5 L 57.6 53.7 L 56.2 54.9 L 54.9 56.1 L 53.6 57.4 L 52.4 58.8 L 51.2 60.3 L 50.2 61.8 L 49.2 63.3 L 48.3 64.9 L 47.4 66.5 L 46.6 68.1 L 45.8 69.8 L 45.1 71.4 L 44.4 73.1 L 43.8 74.8 L 43.2 76.5 L 42.6 78.2 L 42.1 79.9 L 41.6 81.6 L 41.1 83.3 L 40.7 85.1 L 40.4 86.8 L 40.1 88.6 L 39.9 90.4 L 39.7 92.1 L 39.6 93.9 L 39.6 95.7 L 39.6 97.4 L 39.6 99.2 L 39.6 100.9 L 39.7 102.7 L 39.8 104.5 L 40.0 106.2 L 40.1 108.0 L 40.3 109.7 L 40.6 111.5 L 40.9 113.2 L 41.3 114.9 L 41.7 116.6 L 42.2 118.3 L 42.8 120.0 L 43.5 121.6 L 44.3 123.2 L 45.1 124.8 L 46.0 126.3 L 47.0 127.7 L 48.0 129.2 L 49.1 130.6 L 50.1 131.9 L 51.2 133.3 L 52.4 134.6 L 53.5 135.8 L 54.7 137.1 L 55.9 138.3 L 57.2 139.4 L 58.5 140.6 L 59.8 141.6 L 61.1 142.7 L 62.5 143.6 L 63.9 144.5 L 65.4 145.4 L 66.8 146.2 L 68.3 147.0 L 69.8 147.8 L 71.2 148.5 L 72.7 149.3 L 74.2 150.0 L 75.6 150.8 L 77.1 151.5 L 78.6 152.3 L 80.1 153.0 L 81.6 153.7 L 83.1 154.4 L 84.6 155.0 L 86.2 155.6 L 87.8 156.2 L 89.4 156.6 L 91.0 157.0 L 92.7 157.4 L 94.3 157.7 L 96.0 157.9 L 97.7 158.0 L 99.4 158.2 L 101.1 158.2 L 102.8 158.3 L 104.5 158.3 L 106.2 158.3 L 107.9 158.2 L 109.6 158.0 L 111.3 157.8 L 113.0 157.5 L 114.7 157.2 L 116.4 156.7 L 118.0 156.2 L 119.6 155.6 L 121.2 154.9 L 122.8 154.2 L 124.3 153.4 L 125.8 152.5 L 127.2 151.6 L 128.7 150.7 L 130.1 149.8 L 131.5 148.9 L 133.0 148.0 L 134.4 147.1 L 135.8 146.1 L 137.2 145.1 L 138.6 144.1 L 140.0 143.1 L 141.3 142.0 L 142.6 140.9 L 143.9 139.7 L 145.1 138.5 L 146.3 137.2 L 147.4 135.9 L 148.5 134.6 L 149.6 133.2 L 150.6 131.8 L 151.6 130.4 L 152.6 128.9 L 153.6 127.5 L 154.5 126.0 L 155.4 124.4 L 156.3 122.9 L 157.1 121.3 L 157.8 119.7 L 158.4 118.0 L 159.0 116.3 L 159.4 114.6 L 159.8 112.8 L 160.0 111.0 L 160.1 109.3 L 160.2 107.5 L 160.1 105.7 L 160.0 103.9 L 159.8 102.2 L 159.6 100.4 L 159.4 98.7 L 159.1 97.0 L 158.8 95.3 L 158.5 93.6 L 158.1 91.9 L 157.7 90.2 L 157.2 88.6 L 156.7 87.0 L 156.1 85.4 L 155.5 83.8 L 154.8 82.2 L 154.1 80.7 L 153.3 79.2 L 152.9 77.6 L 152.5 75.9 L 152.1 74.2 L 151.7 72.5 L 151.3 70.8 L 151.0 69.0 L 150.7 67.1 L 150.4 65.2 L 150.3 63.0 L 151.2 60.0 Z"/>
+    <rect class="seal" x="176" y="176" width="10" height="10" rx="1"/>
+  </svg>
+  <h1 id="title">Opening Mail</h1>
+  <p id="note">&nbsp;</p>
+</main>
 <script>
 // The message ID travels after the "#", which browsers never send to the server.
 (function () {
+  var title = document.getElementById('title');
+  var note = document.getElementById('note');
   var raw = location.hash.slice(1);
-  var go = document.getElementById('go');
-  var msg = document.getElementById('msg');
-  if (!raw) { msg.textContent = 'This link has no message ID.'; go.remove(); return; }
+  if (!raw) {
+    title.textContent = 'Nothing to open';
+    note.textContent = 'This link carries no message.';
+    return;
+  }
   var id;
   try { id = decodeURIComponent(raw); } catch (e) { id = raw; }
   id = id.replace(/^</, '').replace(/>$/, '');
@@ -27,8 +109,14 @@
   var enc = encodeURIComponent('<' + id + '>').replace(/%(21|24|26|27|28|29|2A|2B|2C|3A|3B|3D|40|2F)/gi,
     function (m) { return decodeURIComponent(m); });
   var url = 'message://' + enc;
-  go.href = url;
+
   location.replace(url);
+
+  // Once the hand-off has had a moment, turn the page into a quiet leftover with a manual fallback.
+  setTimeout(function () {
+    title.textContent = 'Sent to Mail';
+    note.innerHTML = 'You can close this tab. <a href="' + url.replace(/"/g, '%22') + '">Open again</a>';
+  }, 1800);
 })();
 </script>
 </body>
