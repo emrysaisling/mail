@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Opening Mail…</title>
+<style>
+  body { font: 15px -apple-system, system-ui, sans-serif; max-width: 30em; margin: 3em auto; padding: 0 16px; color: #333; background: #fff; }
+  a { color: #06c; }
+</style>
+</head>
+<body>
+<p id="msg">Opening Mail…</p>
+<p><a id="go" href="#">Open the message in Mail</a></p>
+<script>
+// The message ID travels after the "#", which browsers never send to the server.
+(function () {
+  var raw = location.hash.slice(1);
+  var go = document.getElementById('go');
+  var msg = document.getElementById('msg');
+  if (!raw) { msg.textContent = 'This link has no message ID.'; go.remove(); return; }
+  var id;
+  try { id = decodeURIComponent(raw); } catch (e) { id = raw; }
+  id = id.replace(/^</, '').replace(/>$/, '');
+  // Same encoding as the AppleScript side (URL path rules), so links match the format Mail accepts
+  var enc = encodeURIComponent('<' + id + '>').replace(/%(21|24|26|27|28|29|2A|2B|2C|3A|3B|3D|40|2F)/gi,
+    function (m) { return decodeURIComponent(m); });
+  var url = 'message://' + enc;
+  go.href = url;
+  location.replace(url);
+})();
+</script>
+</body>
+</html>
